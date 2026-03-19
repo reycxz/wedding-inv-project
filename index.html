@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,8 +14,6 @@
 </head>
 <body>
   <canvas id="petals-canvas" aria-hidden="true"></canvas>
-
-  <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-brand">Maria &amp; Juan</a>
     <ul class="nav-links" id="nav-links">
@@ -25,23 +23,21 @@
     </ul>
     <button id="music-btn" aria-label="Toggle music">Music</button>
   </nav>
-
-  <!-- HERO SECTION -->
   <section id="hero">
     <img class="hero-bg-img" src="couple.png" alt="Wedding couple illustration" />
     <div class="hero-content">
-      <p class="pre-title">Save the Date · You are cordially invited</p>
-      <h1 class="couple-names">
-        Maria <span class="ampersand">&amp;</span> Juan
-      </h1>
+      <p class="pre-title">Save the Date &middot; You are cordially invited</p>
+      <h1 class="couple-names">Maria <span class="ampersand">&amp;</span> Juan</h1>
       <p class="hero-tagline">Are getting married &amp; they want you there</p>
-      <p class="hero-date">December 25, 2026 &nbsp;·&nbsp; Manila, Philippines</p>
+      <p class="hero-date">December 25, 2026 &nbsp;&middot;&nbsp; Manila, Philippines</p>
+      <div class="hero-event-pills">
+        <span class="event-pill">Ceremony &middot; 4:00 PM &middot; Manila Cathedral, Intramuros</span>
+        <span class="event-pill">Reception &middot; 7:00 PM &middot; Manila Hotel Grand Ballroom</span>
+      </div>
       <div class="hero-divider"></div>
       <img class="hero-couple-img" src="couple.png" alt="Maria and Juan" />
     </div>
   </section>
-
-  <!-- COUNTDOWN SECTION -->
   <section id="countdown">
     <div class="section-inner">
       <p class="section-label reveal">Counting the days</p>
@@ -50,13 +46,11 @@
       <div class="countdown-grid">
         <div class="count-box reveal"><span class="count-num" id="days">00</span><span class="count-label">Days</span></div>
         <div class="count-box reveal"><span class="count-num" id="hours">00</span><span class="count-label">Hours</span></div>
-        <div class="count-box reveal"><span class="count-num" id="minutes">00</span><span class="count-label">Minutes</span></div>
-        <div class="count-box reveal"><span class="count-num" id="seconds">00</span><span class="count-label">Seconds</span></div>
+        <div class="count-box reveal"><span class="count-num" id="minutes">00</span><span class="count-label">Min</span></div>
+        <div class="count-box reveal"><span class="count-num" id="seconds">00</span><span class="count-label">Sec</span></div>
       </div>
     </div>
   </section>
-
-  <!-- EVENT DETAILS -->
   <section id="details">
     <div class="section-inner">
       <p class="section-label reveal">Join Us</p>
@@ -64,33 +58,80 @@
       <span class="gold-line reveal"></span>
       <div class="details-grid-new">
         <div class="venue-card reveal">
-          <h3>Ceremony</h3>
-          <p>Manila Cathedral, Intramuros, Manila</p>
-          <p>December 25, 2026 | 4:00 PM</p>
+          <div class="venue-header">
+            <div class="venue-header-text">
+              <h3>Ceremony</h3>
+              <p>Manila Cathedral &middot; Intramuros, Manila</p>
+              <p class="venue-time">December 25, 2026 &nbsp;|&nbsp; 4:00 PM</p>
+            </div>
+          </div>
+          <div class="venue-gallery">
+            <div class="gallery-thumb" data-img="church1.png" data-caption="Manila Cathedral – Exterior">
+              <img src="church1.png" alt="Manila Cathedral exterior" />
+              <div class="thumb-overlay">View</div>
+            </div>
+            <div class="gallery-thumb" data-img="church2.png" data-caption="Ceremony Hall – Interior">
+              <img src="church2.png" alt="Church interior" />
+              <div class="thumb-overlay">View</div>
+            </div>
+          </div>
+          <a class="venue-map-link" href="https://maps.google.com/?q=Manila+Cathedral" target="_blank" rel="noopener">View on Google Maps &uarr;</a>
         </div>
         <div class="venue-card reveal">
-          <h3>Reception</h3>
-          <p>Grand Ballroom, Manila Hotel, Rizal Park</p>
-          <p>December 25, 2026 | 7:00 PM</p>
+          <div class="venue-header">
+            <div class="venue-header-text">
+              <h3>Reception</h3>
+              <p>Grand Ballroom, Manila Hotel &middot; Rizal Park</p>
+              <p class="venue-time">December 25, 2026 &nbsp;|&nbsp; 7:00 PM</p>
+            </div>
+          </div>
+          <div class="venue-gallery">
+            <div class="gallery-thumb" data-img="ballroom1.png" data-caption="Manila Hotel Grand Ballroom">
+              <img src="ballroom1.png" alt="Grand Ballroom" />
+              <div class="thumb-overlay">View</div>
+            </div>
+            <div class="gallery-thumb" data-img="ballroom2.png" data-caption="Reception Dance Floor">
+              <img src="ballroom2.png" alt="Reception dance floor" />
+              <div class="thumb-overlay">View</div>
+            </div>
+          </div>
+          <a class="venue-map-link" href="https://maps.google.com/?q=The+Manila+Hotel" target="_blank" rel="noopener">View on Google Maps &uarr;</a>
         </div>
         <div class="venue-card dress-code-card reveal">
-          <h3>Dress Code</h3>
-          <p>Formal Attire · Color Motif: Blush &amp; Gold</p>
+          <div class="venue-header">
+            <div class="venue-header-text">
+              <h3>Dress Code</h3>
+              <p>Formal Attire &nbsp;&middot;&nbsp; Color Motif: Blush &amp; Gold</p>
+            </div>
+          </div>
+          <div class="attire-tabs">
+            <button class="attire-tab active" data-tab="men">Men</button>
+            <button class="attire-tab" data-tab="women">Women</button>
+          </div>
+          <div class="attire-panel" id="tab-men">
+            <div class="gallery-thumb" data-img="attire_men.png" data-caption="Men s Formal Attire">
+              <img src="attire_men.png" alt="Men s formal attire" />
+              <div class="thumb-overlay">View</div>
+            </div>
+            <p class="attire-note">Barong Tagalog or White Dinner Suit<br/>with Gold tie &amp; pocket square</p>
+          </div>
+          <div class="attire-panel hidden" id="tab-women">
+            <div class="gallery-thumb" data-img="attire_women.png" data-caption="Women s Formal Attire">
+              <img src="attire_women.png" alt="Women s formal attire" />
+              <div class="thumb-overlay">View</div>
+            </div>
+            <p class="attire-note">Blush Pink or Gold Floor-length Gown<br/>with elegant accessories</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ABOUT US -->
   <section id="about">
     <div class="section-inner">
       <p class="section-label reveal">Meet the Team</p>
       <h2 class="section-title reveal">About Us</h2>
       <span class="gold-line reveal"></span>
-      <p class="about-intro reveal">
-        This wedding invitation was lovingly crafted as a group project for
-        <strong>Emerging Technologies 1 (CPE 408A-CPE22S2)</strong>.
-      </p>
+      <p class="about-intro reveal">This wedding invitation was lovingly crafted as a group project for <strong>Emerging Technologies 1 (CPE 408A-CPE22S2)</strong>.</p>
       <div class="members-grid">
         <div class="member-card reveal">
           <div class="member-avatar member-avatar-text">RL</div>
@@ -118,13 +159,16 @@
       </div>
     </div>
   </section>
-
   <footer>
     <p>Made with care by CPE 408A-CPE22S2</p>
-    <p>Emerging Technologies 1 &nbsp;·&nbsp; Group Project</p>
+    <p>Emerging Technologies 1 &nbsp;&middot;&nbsp; Group Project</p>
     <p style="margin-top:0.8rem; font-size:0.75rem; opacity:0.6;">© 2026 Maria &amp; Juan. All rights reserved.</p>
   </footer>
-
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&#10005;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p id="lightbox-caption"></p>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
