@@ -1,0 +1,10 @@
+          <a id="portfolio-cabanog" class="portfolio-btn" href="https://github.com/reycxz" target="_blank"
+            View Portfolio ↗
+          <a id="portfolio-talain" class="portfolio-btn" href="#" target="_blank" rel="noopener">
+            View Portfolio ↗
+          <a id="portfolio-solvera" class="portfolio-btn" href="#" target="_blank" rel="noopener">
+            View Portfolio ↗
+        <span class="event-pill">Ceremony &middot; 4:00 PM &middot; Manila Cathedral, Intramuros</span>
+              <p>Manila Cathedral &middot; Intramuros, Manila</p>
+              data-caption="Manila Cathedral – Exterior">
+              <img src="source-images/church1.png" alt="Manila Cathedral exterior" />
