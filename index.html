@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation – Maria &amp; Juan | CPE 408A</title>
+  <meta name="description" content="You are cordially invited to the wedding of Maria &amp; Juan. CPE 408A-CPE22S2 Emerging Technologies 1 Project." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <audio id="bg-music" loop>
+    <source src="wedding-thousandyears.mp3" type="audio/mp3" />
+  </audio>
+</head>
+<body>
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-brand">Maria &amp; Juan</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#countdown">Save the Date</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#about">About Us</a></li>
+    </ul>
+    <button id="music-btn" aria-label="Toggle music">Music</button>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero">
+    <img class="hero-bg-img" src="couple.png" alt="Wedding couple illustration" />
+    <div class="hero-content">
+      <p class="pre-title">Save the Date · You are cordially invited</p>
+      <h1 class="couple-names">
+        Maria <span class="ampersand">&amp;</span> Juan
+      </h1>
+      <p class="hero-tagline">Are getting married &amp; they want you there</p>
+      <p class="hero-date">December 25, 2026 &nbsp;·&nbsp; Manila, Philippines</p>
+      <div class="hero-divider"></div>
+      <img class="hero-couple-img" src="couple.png" alt="Maria and Juan" />
+    </div>
+  </section>
+
+  <!-- COUNTDOWN SECTION -->
+  <section id="countdown">
+    <div class="section-inner">
+      <p class="section-label reveal">Counting the days</p>
+      <h2 class="section-title reveal">Until We Say "I Do"</h2>
+      <span class="gold-line reveal"></span>
+      <div class="countdown-grid">
+        <div class="count-box reveal"><span class="count-num" id="days">00</span><span class="count-label">Days</span></div>
+        <div class="count-box reveal"><span class="count-num" id="hours">00</span><span class="count-label">Hours</span></div>
+        <div class="count-box reveal"><span class="count-num" id="minutes">00</span><span class="count-label">Minutes</span></div>
+        <div class="count-box reveal"><span class="count-num" id="seconds">00</span><span class="count-label">Seconds</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT DETAILS -->
+  <section id="details">
+    <div class="section-inner">
+      <p class="section-label reveal">Join Us</p>
+      <h2 class="section-title reveal">Wedding Details</h2>
+      <span class="gold-line reveal"></span>
+      <div class="details-grid-new">
+        <div class="venue-card reveal">
+          <h3>Ceremony</h3>
+          <p>Manila Cathedral, Intramuros, Manila</p>
+          <p>December 25, 2026 | 4:00 PM</p>
+        </div>
+        <div class="venue-card reveal">
+          <h3>Reception</h3>
+          <p>Grand Ballroom, Manila Hotel, Rizal Park</p>
+          <p>December 25, 2026 | 7:00 PM</p>
+        </div>
+        <div class="venue-card dress-code-card reveal">
+          <h3>Dress Code</h3>
+          <p>Formal Attire · Color Motif: Blush &amp; Gold</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT US -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label reveal">Meet the Team</p>
+      <h2 class="section-title reveal">About Us</h2>
+      <span class="gold-line reveal"></span>
+      <p class="about-intro reveal">
+        This wedding invitation was lovingly crafted as a group project for
+        <strong>Emerging Technologies 1 (CPE 408A-CPE22S2)</strong>.
+      </p>
+      <div class="members-grid">
+        <div class="member-card reveal">
+          <div class="member-avatar member-avatar-text">RL</div>
+          <p class="member-name">CABANOG, Rey Lorenz</p>
+          <p class="member-role">Lead Developer</p>
+          <a id="portfolio-cabanog" class="portfolio-btn" href="https://github.com/reycxz" target="_blank" rel="noopener">View Portfolio ↗</a>
+        </div>
+        <div class="member-card reveal">
+          <div class="member-avatar member-avatar-text">RI</div>
+          <p class="member-name">TALAIN, Renzo Isaiah</p>
+          <p class="member-role">UI Design &amp; Assistant Lead</p>
+          <a id="portfolio-talain" class="portfolio-btn" href="#" target="_blank" rel="noopener">View Portfolio ↗</a>
+        </div>
+        <div class="member-card reveal">
+          <div class="member-avatar member-avatar-text">JD</div>
+          <p class="member-name">SOLVERA, Josh Daniel</p>
+          <p class="member-role">Content Idea &amp; UI Designer</p>
+          <a id="portfolio-solvera" class="portfolio-btn" href="#" target="_blank" rel="noopener">View Portfolio ↗</a>
+        </div>
+      </div>
+      <div class="course-badge reveal">
+        <p><strong>Subject:</strong> Emerging Technologies 1 in CpE</p>
+        <p><strong>Section:</strong> CPE 408A-CPE22S2</p>
+        <p style="margin-top:0.5rem; color: var(--blush);">Bachelor of Science in Computer Engineering</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with care by CPE 408A-CPE22S2</p>
+    <p>Emerging Technologies 1 &nbsp;·&nbsp; Group Project</p>
+    <p style="margin-top:0.8rem; font-size:0.75rem; opacity:0.6;">© 2026 Maria &amp; Juan. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
