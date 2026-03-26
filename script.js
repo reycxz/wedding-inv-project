@@ -55,11 +55,36 @@ revealEls.forEach(el => observer.observe(el));
   const audio = document.getElementById('bg-music');
   if (!btn || !audio) return;
   let playing = false;
-  document.addEventListener('click', () => { if (!playing) { audio.play().catch(()=>{}); playing = true; } }, { once: true });
-  btn.addEventListener('click', () => {
-    if (audio.paused) { audio.play(); btn.textContent = 'Pause'; }
-    else              { audio.pause(); btn.textContent = 'Music'; }
+  
+  function updateMusicState() {
+    if (!audio.paused) {
+      btn.classList.add('playing');
+    } else {
+      btn.classList.remove('playing');
+    }
+  }
+
+  document.addEventListener('click', () => { 
+    if (!playing) { 
+      audio.play().then(() => updateMusicState()).catch(()=>{}); 
+      playing = true; 
+    } 
+  }, { once: true });
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent initial click from triggering twice
+    if (audio.paused) { 
+      audio.play().then(() => updateMusicState()).catch(()=>{}); 
+      playing = true;
+    } else { 
+      audio.pause(); 
+      updateMusicState();
+    }
   });
+
+  // Always keep in sync
+  audio.addEventListener('play', updateMusicState);
+  audio.addEventListener('pause', updateMusicState);
 })();
 
 // 5. Attire tab toggle
