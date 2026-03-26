@@ -5,6 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Invitation &ndash; Maria &amp; Juan</title>
+  <script>
+    if (!sessionStorage.getItem('invitationAccepted')) {
+      window.location.replace('invitation.html');
+    }
+  </script>
   <meta name="description"
     content="You are cordially invited to the wedding of Maria & Juan. CPE 408A-CPE22S2 Emerging Technologies 1 Project." />
   <link rel="stylesheet" href="style.css" />

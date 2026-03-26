@@ -286,7 +286,7 @@
       <div class="envelope-card">
         <div class="env-names">Maria &amp; Juan</div>
         <div class="env-text">Are getting married</div>
-        <button class="accept-btn" onclick="window.location.href='index.html'">Accept</button>
+        <button class="accept-btn" onclick="acceptInvitation()">Accept</button>
       </div>
       
       <div class="envelope-front"></div>
@@ -345,6 +345,11 @@
         createSparkles();
       }
     });
+
+    function acceptInvitation() {
+      sessionStorage.setItem('invitationAccepted', 'true');
+      window.location.href = 'index.html';
+    }
   </script>
 </body>
 </html>
