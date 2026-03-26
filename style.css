@@ -90,8 +90,8 @@ section { padding: 0; }
 .thumb-overlay { position: absolute; inset: 0; background: rgba(13,5,8,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; color: var(--gold); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
 .gallery-thumb:hover img { transform: scale(1.05); }
 .gallery-thumb:hover .thumb-overlay { opacity: 1; }
-.venue-map-link { display: inline-block; color: var(--blush); font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid var(--blush); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
-.venue-map-link:hover { color: var(--gold); border-color: var(--gold); }
+.venue-map-link-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--blush); transition: color 0.3s, transform 0.3s; background: transparent; }
+.venue-map-link-icon:hover { color: var(--gold); transform: translateY(-3px); }
 
 .venue-split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; align-items: stretch; }
 .venue-map { width: 100%; height: 100%; }
