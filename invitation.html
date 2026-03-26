@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Invited &ndash; Maria &amp; Juan</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto; /* allow scrolling if very small screen */
+      margin: 0;
+      perspective: 1500px;
+    }
+    
+    .petals-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+      z-index: 0;
+      filter: blur(4px);
+    }
+    
+    .invitation-container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      animation: fadeIn 1.5s ease-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 4rem; /* gives some headroom */
+      margin-bottom: 4rem;
+    }
+    
+    /* ENVELOPE */
+    .envelope {
+      position: relative;
+      width: 400px;
+      height: 260px;
+      background: #9b7d30; /* Darker inside back */
+      border-radius: 4px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .envelope:hover {
+      transform: translateY(-8px);
+    }
+    
+    /* Center the envelope properly and move it down when opened */
+    .envelope.open {
+      transform: translateY(60px); /* Move down so card fits on screen */
+      cursor: default; /* Remove pointer since it's open */
+    }
+    
+    /* ENVELOPE FRONT FLAPS (SIDES & BOTTOM) */
+    .envelope-front {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .envelope-front::before {
+      /* Side flaps */
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-left: 200px solid var(--gold);
+      border-right: 200px solid var(--gold);
+      border-top: 130px solid transparent;
+      border-bottom: 130px solid transparent;
+    }
+    .envelope-front::after {
+      /* Bottom flap */
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      border-left: 200px solid transparent;
+      border-right: 200px solid transparent;
+      border-bottom: 140px solid var(--gold-light);
+    }
+    
+    /* TOP FLAP */
+    .envelope-top-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      border-left: 200px solid transparent;
+      border-right: 200px solid transparent;
+      border-top: 145px solid #dcb25b; /* slightly different gold for depth */
+      transform-origin: top;
+      /* Normal closed state: delay Z-index change to wait for card to slide in when closing */
+      z-index: 5;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s, z-index 0s 0.8s;
+      pointer-events: none;
+    }
+    
+    .envelope.open .envelope-top-flap {
+      transform: rotateX(180deg);
+      z-index: 1; /* Drop behind card */
+      /* Open state: change Z-index midway so it falls behind smoothly */
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s, z-index 0s 0.3s;
+    }
+    
+    /* WAX SEAL */
+    .wax-seal {
+      position: absolute;
+      width: 75px;
+      height: 75px;
+      background: radial-gradient(circle at 30% 30%, #a82e46, #6b1a2e);
+      border-radius: 50%;
+      z-index: 6;
+      top: 145px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 0 8px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.6rem;
+      white-space: nowrap;
+      transition: opacity 0.4s ease 0s, transform 0.4s ease;
+      pointer-events: none;
+    }
+    
+    .envelope.open .wax-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+    
+    /* CARD INSIDE */
+    .envelope-card {
+      position: absolute;
+      top: 10px; bottom: 10px; left: 12px; right: 12px;
+      background: var(--cream);
+      border-radius: 6px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      /* Closed state: slide in first, then top flap closes */
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    }
+    
+    .envelope.open .envelope-card {
+      transform: translateY(-130px); /* Less dramatic jump, paired with envelope moving down */
+      /* Open state: wait 0.4s for flap to open before sliding out */
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+    }
+    
+    /* CARD CONTENT */
+    .env-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: var(--burgundy);
+      margin-bottom: 0.2rem;
+      margin-top: auto;
+      white-space: nowrap;
+    }
+    .env-text {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.5rem;
+    }
+    
+    .accept-btn {
+      background: var(--burgundy);
+      color: var(--cream);
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 30px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease 0s, background 0.3s, transform 0.3s;
+      box-shadow: 0 4px 15px rgba(123, 31, 58, 0.4);
+      margin-bottom: auto;
+    }
+    
+    .envelope.open .accept-btn {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.6s ease 1.1s, background 0.3s, transform 0.3s;
+    }
+    
+    .accept-btn:hover {
+      background: var(--rose);
+      transform: translateY(-2px) scale(1.05);
+    }
+    
+    .hint-text {
+      color: var(--gold-light); 
+      font-family: 'Playfair Display', serif; 
+      font-style: italic; 
+      font-size: 1.1rem;
+      margin-top: 1rem; 
+      opacity: 0.9;
+      transition: opacity 0.5s ease;
+      letter-spacing: 1px;
+    }
+    
+    .about-btn {
+      position: absolute;
+      bottom: 1.5rem; /* give bottom spacing since the envelope might move down */
+      color: var(--gold-light);
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 4px;
+      transition: color 0.3s, border-color 0.3s, transform 0.3s;
+      z-index: 10;
+    }
+    .about-btn:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* SPARKLE ANIMATIONS */
+    .sparkle {
+      position: absolute;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: glitter 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      z-index: 20;
+    }
+    @keyframes glitter {
+      0% { opacity: 0; transform: translate(var(--startX), var(--startY)) scale(0); }
+      20% { opacity: 1; transform: translate(calc(var(--startX) * 1.5), calc(var(--startY) - 40px)) scale(1.5); }
+      100% { opacity: 0; transform: translate(var(--endX), var(--endY)) scale(0); }
+    }
+    
+    @media (max-width: 480px) {
+      .envelope { width: 320px; height: 220px; }
+      .envelope-front::before { border-left-width: 160px; border-right-width: 160px; border-top-width: 110px; border-bottom-width: 110px; }
+      .envelope-front::after { border-left-width: 160px; border-right-width: 160px; border-bottom-width: 120px; }
+      .envelope-top-flap { border-left-width: 160px; border-right-width: 160px; border-top-width: 125px; }
+      .wax-seal { top: 125px; width: 65px; height: 65px; font-size: 1.4rem; }
+      .envelope.open .envelope-card { transform: translateY(-110px); }
+      .env-names { font-size: 2.3rem; }
+      .accept-btn { font-size: 1rem; padding: 0.6rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  
+  <img class="petals-bg" src="source-images/couple.png" alt="Background" />
+
+  <div class="invitation-container" id="inv-container">
+    <div class="envelope" id="envelope">
+      
+      <div class="envelope-card">
+        <div class="env-names">Maria &amp; Juan</div>
+        <div class="env-text">Are getting married</div>
+        <button class="accept-btn" onclick="window.location.href='index.html'">Accept</button>
+      </div>
+      
+      <div class="envelope-front"></div>
+      <div class="envelope-top-flap"></div>
+      <div class="wax-seal">M &amp; J</div>
+      
+    </div>
+    <p class="hint-text" id="hint-text">Click to open invitation</p>
+  </div>
+
+  <a href="about.html" class="about-btn">About Us</a>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const hintText = document.getElementById('hint-text');
+    const container = document.getElementById('inv-container');
+    
+    function createSparkles() {
+      const colors = ['#e8cfa0', '#c9a84c', '#ffffff', '#e8a0b0'];
+      for (let i = 0; i < 45; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        sparkle.style.background = color;
+        sparkle.style.boxShadow = `0 0 12px ${color}`;
+        
+        // Random starting and ending paths
+        const startX = (Math.random() - 0.5) * 150;
+        const startY = (Math.random() - 0.5) * 80;
+        const endX = startX + (Math.random() - 0.5) * 300;
+        const endY = startY - 150 - Math.random() * 150;
+        
+        sparkle.style.setProperty('--startX', `${startX}px`);
+        sparkle.style.setProperty('--startY', `${startY}px`);
+        sparkle.style.setProperty('--endX', `${endX}px`);
+        sparkle.style.setProperty('--endY', `${endY}px`);
+        
+        // Start near the opening of the envelope
+        sparkle.style.left = `50%`;
+        sparkle.style.top = `40%`;
+        
+        // Delay matches the moment the card slides out
+        sparkle.style.animationDelay = `${Math.random() * 0.4 + 0.3}s`; 
+        
+        container.appendChild(sparkle);
+        
+        // Clean up
+        setTimeout(() => sparkle.remove(), 2500);
+      }
+    }
+
+    envelope.addEventListener('click', () => {
+      if (!envelope.classList.contains('open')) {
+        envelope.classList.add('open');
+        hintText.style.opacity = '0';
+        createSparkles();
+      }
+    });
+  </script>
+</body>
+</html>
