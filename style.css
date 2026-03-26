@@ -1,4 +1,4 @@
-﻿/* ── FONTS ─────────────────────────────────────────────── */
+/* ── FONTS ─────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
 
 /* ── CSS VARIABLES ─────────────────────────────────────── */
@@ -92,6 +92,10 @@ section { padding: 0; }
 .gallery-thumb:hover .thumb-overlay { opacity: 1; }
 .venue-map-link { display: inline-block; color: var(--blush); font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid var(--blush); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
 .venue-map-link:hover { color: var(--gold); border-color: var(--gold); }
+
+.venue-split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; align-items: stretch; }
+.venue-map { width: 100%; height: 100%; }
+.venue-map iframe { width: 100%; height: 100%; border: 0; border-radius: 12px; min-height: 250px; }
 
 /* ── DRESS CODE SLIDESHOW ───────────────────────── */
 .attire-tabs { display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; }
@@ -191,6 +195,7 @@ footer { text-align: center; padding: 2.5rem 1rem; border-top: 1px solid var(--g
   
   .details-grid-new { grid-template-columns: 1fr; }
   .venue-gallery { grid-template-columns: 1fr; }
+  .venue-split-layout { grid-template-columns: 1fr; }
   .venue-header { flex-direction: column; text-align: center; align-items: center; }
   .attire-tabs { justify-content: center; }
   

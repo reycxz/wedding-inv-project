@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 // 1. Scroll Reveal
 const revealEls = document.querySelectorAll('.reveal');
@@ -344,8 +344,13 @@ revealEls.forEach(el => observer.observe(el));
 
   const menSS   = document.getElementById('slideshow-men');
   const womenSS = document.getElementById('slideshow-women');
+  const ceremonySS = document.getElementById('slideshow-ceremony');
+  const receptionSS = document.getElementById('slideshow-reception');
+
   if (menSS)   buildSlideshow(menSS,   'dots-men');
   if (womenSS) buildSlideshow(womenSS, 'dots-women');
+  if (ceremonySS) buildSlideshow(ceremonySS, 'dots-ceremony');
+  if (receptionSS) buildSlideshow(receptionSS, 'dots-reception');
 
   // Re-init when tab is switched to reset active slides
   document.querySelectorAll('.attire-tab').forEach(tab => {
