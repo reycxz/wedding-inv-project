@@ -43,11 +43,19 @@
       margin-bottom: 4rem;
     }
     
+    :root {
+      --env-w: 400px;
+      --env-h: 260px;
+      --flap-top: 145px;
+      --flap-bottom: 140px;
+      --flap-side: 200px;
+    }
+
     /* ENVELOPE */
     .envelope {
       position: relative;
-      width: 400px;
-      height: 260px;
+      width: var(--env-w);
+      height: var(--env-h);
       background: #9b7d30; /* Darker inside back */
       border-radius: 4px;
       box-shadow: 0 25px 60px rgba(0,0,0,0.7);
@@ -60,13 +68,11 @@
       transform: translateY(-8px);
     }
     
-    /* Center the envelope properly and move it down when opened */
     .envelope.open {
-      transform: translateY(60px); /* Move down so card fits on screen */
-      cursor: default; /* Remove pointer since it's open */
+      transform: translateY(60px);
+      cursor: default;
     }
     
-    /* ENVELOPE FRONT FLAPS (SIDES & BOTTOM) */
     .envelope-front {
       position: absolute;
       inset: 0;
@@ -74,34 +80,30 @@
       pointer-events: none;
     }
     .envelope-front::before {
-      /* Side flaps */
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      border-left: 200px solid var(--gold);
-      border-right: 200px solid var(--gold);
-      border-top: 130px solid transparent;
-      border-bottom: 130px solid transparent;
+      border-left: var(--flap-side) solid var(--gold);
+      border-right: var(--flap-side) solid var(--gold);
+      border-top: calc(var(--env-h) / 2) solid transparent;
+      border-bottom: calc(var(--env-h) / 2) solid transparent;
     }
     .envelope-front::after {
-      /* Bottom flap */
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      border-left: 200px solid transparent;
-      border-right: 200px solid transparent;
-      border-bottom: 140px solid var(--gold-light);
+      border-left: var(--flap-side) solid transparent;
+      border-right: var(--flap-side) solid transparent;
+      border-bottom: var(--flap-bottom) solid var(--gold-light);
     }
     
-    /* TOP FLAP */
     .envelope-top-flap {
       position: absolute;
       top: 0; left: 0; right: 0;
-      border-left: 200px solid transparent;
-      border-right: 200px solid transparent;
-      border-top: 145px solid #dcb25b; /* slightly different gold for depth */
+      border-left: var(--flap-side) solid transparent;
+      border-right: var(--flap-side) solid transparent;
+      border-top: var(--flap-top) solid #dcb25b;
       transform-origin: top;
-      /* Normal closed state: delay Z-index change to wait for card to slide in when closing */
       z-index: 5;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s, z-index 0s 0.8s;
       pointer-events: none;
@@ -109,8 +111,7 @@
     
     .envelope.open .envelope-top-flap {
       transform: rotateX(180deg);
-      z-index: 1; /* Drop behind card */
-      /* Open state: change Z-index midway so it falls behind smoothly */
+      z-index: 1;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0s, z-index 0s 0.3s;
     }
     
@@ -122,7 +123,7 @@
       background: radial-gradient(circle at 30% 30%, #a82e46, #6b1a2e);
       border-radius: 50%;
       z-index: 6;
-      top: 145px;
+      top: var(--flap-top);
       left: 50%;
       transform: translate(-50%, -50%);
       box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 0 8px rgba(0,0,0,0.6);
@@ -265,12 +266,15 @@
     }
     
     @media (max-width: 480px) {
-      .envelope { width: 320px; height: 220px; }
-      .envelope-front::before { border-left-width: 160px; border-right-width: 160px; border-top-width: 110px; border-bottom-width: 110px; }
-      .envelope-front::after { border-left-width: 160px; border-right-width: 160px; border-bottom-width: 120px; }
-      .envelope-top-flap { border-left-width: 160px; border-right-width: 160px; border-top-width: 125px; }
-      .wax-seal { top: 125px; width: 65px; height: 65px; font-size: 1.4rem; }
-      .envelope.open .envelope-card { transform: translateY(-110px); }
+      :root {
+        --env-w: 90vw;
+        --env-h: 58.5vw;
+        --flap-top: 32.6vw;
+        --flap-bottom: 31.5vw;
+        --flap-side: 45vw;
+      }
+      .wax-seal { width: 60px; height: 60px; font-size: 1.3rem; }
+      .envelope.open .envelope-card { transform: translateY(-30vw); }
       .env-names { font-size: 2.3rem; }
       .accept-btn { font-size: 1rem; padding: 0.6rem 2rem; }
     }
